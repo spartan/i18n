@@ -1,0 +1,50 @@
+{
+    "name": "spartan/i18n",
+    "description": "Spartan I18n library",
+    "type": "library",
+    "keywords": [
+        "library",
+        "spartan",
+        "i18n"
+    ],
+    "homepage": "https://spartanphp.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Iulian N.",
+            "email": "iulian@spartanphp.com",
+            "homepage": "https://spartanphp.com",
+            "role": "developer"
+        }
+    ],
+    "support": {
+        "email": "support@spartanphp.com",
+        "docs": "https://docs.spartanphp.com"
+    },
+    "require": {
+        "php": ">=7.4",
+        "spartan/console": "dev-master",
+        "gettext/gettext": "^4.7",
+        "stichoza/google-translate-php": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Spartan\\I18n\\": "src/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Spartan\\I18n\\Test\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

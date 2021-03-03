@@ -1,0 +1,12 @@
+{
+    "language": "english",
+    "locale": "en_US",
+    "direction": "ltr",
+    "namespaced": true,
+    "messages": {
+        "hello": "Hello world!"
+    },
+    "context": {
+        "hello": "Say hello to the world!"
+    }
+}
