@@ -23,7 +23,7 @@
     },
     "require": {
         "php": ">=7.4",
-        "spartan/console": "dev-master",
+        "spartan/console": "^0.1.0",
         "gettext/gettext": "^4.7",
         "stichoza/google-translate-php": "^4.0"
     },
@@ -43,7 +43,19 @@
     "config": {
         "sort-packages": true
     },
-    "scripts": {
+    "extra": {
+        "spartan": {
+            "install": {
+                "env": {
+                    "I18N_LOCALE": "en_US",
+                    "I18N_DOMAIN": "./resources/translations",
+                    "I18N_FALLBACK": "en_US"
+                },
+                "commands": [
+                    "__DIR__ . '/../vendor/spartan/i18n/src/Command'"
+                ]
+            }
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
