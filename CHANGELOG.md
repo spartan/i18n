@@ -1,4 +1,11 @@
 # Changelog
+### [0.1.3](https://github.com/spartan/i18n/compare/v0.1.2...v0.1.3) (2021-03-07)
+
+
+### Fixes
+
+* add functions.php to composer autoload on require section too ([bab4f39](https://github.com/spartan/i18n/commit/bab4f3940a71c456b80fcc4c05184e0efa595487))
+
 ### [0.1.2](https://github.com/spartan/i18n/compare/v0.1.1...v0.1.2) (2021-03-07)
 
 
