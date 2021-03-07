@@ -1,4 +1,16 @@
 # Changelog
+### [0.1.2](https://github.com/spartan/i18n/compare/v0.1.1...v0.1.2) (2021-03-07)
+
+
+### Fixes
+
+* add functions.php to composer autoload ([1c3435c](https://github.com/spartan/i18n/commit/1c3435cb820c6b3f944b27899d4d7f7a612f811d))
+
+
+### Changes
+
+* use Command::loadEnv static method ([eab14a5](https://github.com/spartan/i18n/commit/eab14a50e288f14bc40ef6098af1f91ebc054c3d))
+
 ### [0.1.1](https://github.com/spartan/i18n/compare/v0.1.0...v0.1.1) (2021-03-04)
 
 
