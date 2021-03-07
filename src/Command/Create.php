@@ -35,7 +35,7 @@ class Create extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->loadEnv();
+        self::loadEnv();
 
         $dest = getenv('I18N_DOMAIN') ?: './resource/locales';
 

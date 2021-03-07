@@ -32,7 +32,7 @@ class Translate extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->loadEnv();
+        self::loadEnv();
 
         /** @var string $lang */
         $lang  = $input->getOption('lang');

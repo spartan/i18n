@@ -35,7 +35,7 @@ class Extract extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->loadEnv();
+        self::loadEnv();
 
         /** @var string $src */
         $src    = $input->getOption('src');
