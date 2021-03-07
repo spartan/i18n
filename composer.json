@@ -38,7 +38,10 @@
     "autoload-dev": {
         "psr-4": {
             "Spartan\\I18n\\Test\\": "tests/"
-        }
+        },
+        "files": [
+            "src/functions.php"
+        ]
     },
     "config": {
         "sort-packages": true
