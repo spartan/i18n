@@ -54,7 +54,7 @@
             "install": {
                 "env": {
                     "I18N_LOCALE": "en_US",
-                    "I18N_DOMAIN": "./resources/translations",
+                    "I18N_DOMAIN": "./resources/locales",
                     "I18N_FALLBACK": "en_US"
                 },
                 "commands": [
