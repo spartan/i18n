@@ -1,4 +1,12 @@
 # Changelog
+### [0.1.4](https://github.com/spartan/i18n/compare/v0.1.3...v0.1.4) (2021-03-10)
+
+
+### Changes
+
+* i18n domain fallback change to locales directory ([fbe928a](https://github.com/spartan/i18n/commit/fbe928a6a975e6c7fd0bc39d940dfcaa07021237))
+* more options for commands to work outside a php directory ([5db5cb4](https://github.com/spartan/i18n/commit/5db5cb473dea4f33b97193aaf3d26dd9415aff69))
+
 ### [0.1.3](https://github.com/spartan/i18n/compare/v0.1.2...v0.1.3) (2021-03-07)
 
 
