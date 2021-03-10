@@ -23,6 +23,8 @@ class Extract extends Command
         $this->withSynopsis('i18n:extract', 'Extract translations from different files into .json')
              ->withOption('src', 'Source path(s) with files to parse', './src')
              ->withOption('dry', 'Dry run without saving')
+             ->withOption('dst', 'Path of locale files')
+             ->withOption('smart-copy', 'Text with spaces are considered paragraphs and copied verbatim')
              ->withOption('append', 'Append without removing');
     }
 
@@ -38,9 +40,10 @@ class Extract extends Command
         self::loadEnv();
 
         /** @var string $src */
-        $src    = $input->getOption('src');
-        $dst    = getenv('I18N_DOMAIN') ?: './resources/locales';
-        $append = $this->isOptionPresent('append');
+        $src         = $input->getOption('src');
+        $dst         = $input->getOption('dst') ?: (getenv('I18N_DOMAIN') ?: './resources / locales');
+        $append      = $this->isOptionPresent('append');
+        $isSmartCopy = $this->isOptionPresent('smart-copy');
 
         $keys = [];
         foreach (explode(',', $src) as $oneSrc) {
@@ -108,6 +111,14 @@ class Extract extends Command
 
                 // add new
                 $json['messages'] += $data['new'];
+
+                if ($isSmartCopy) {
+                    foreach ($json['messages'] as $key => &$value) {
+                        if (strpos($key, ' ') > 0 && $value === '') {
+                            $value = $key;
+                        }
+                    }
+                }
 
                 file_put_contents(
                     $data['file'],

@@ -15,14 +15,14 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @author  Iulian N. <iulian@spartanphp.com>
  * @license LICENSE MIT
  */
-class Create extends Command
+class Make extends Command
 {
     /**
      * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
     protected function configure(): void
     {
-        $this->withSynopsis('i18n:create', 'Create a json translation file')
+        $this->withSynopsis('i18n:make', 'Create a json translation file', ['i18n:create'])
              ->withArgument('name', 'Locale names. Ex: en_US,fr_FR');
     }
 
@@ -37,10 +37,10 @@ class Create extends Command
     {
         self::loadEnv();
 
-        $dest = getenv('I18N_DOMAIN') ?: './resource/locales';
+        $dest = getenv('I18N_DOMAIN') ?: './resources/locales';
 
         foreach (explode(',', $this->name) as $locale) {
-            $locale = preg_replace('/[^a-zA-Z]+/', '-', $locale);
+            $locale = preg_replace('/[^a-zA-Z]+/', '_', $locale);
             $file   = "{$dest}/{$locale}.json";
 
             file_put_contents(

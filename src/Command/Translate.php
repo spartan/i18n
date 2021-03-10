@@ -19,7 +19,8 @@ class Translate extends Command
     protected function configure(): void
     {
         $this->withSynopsis('i18n:translate', 'Translate strings from json files')
-             ->withOption('lang', 'Source language. Defaults to en-US', 'en-US')
+             ->withOption('src', 'Source language files. Defaults to environment variable')
+             ->withOption('lang', 'Source language. Defaults to en_US', 'en_US')
              ->withOption('delay', 'Delay seconds between each translation (required to avoid banning of IP)', 5);
     }
 
@@ -36,7 +37,7 @@ class Translate extends Command
 
         /** @var string $lang */
         $lang  = $input->getOption('lang');
-        $src   = (getenv('I18N_DOMAIN') ?: './resources/locales/') . $lang . '.json';
+        $src   = ($input->getOption('src') ?: (getenv('I18N_DOMAIN') ?: './resources/locales'));
         $delay = $input->getOption('delay');
         $delay = is_array($delay) ? 0 : (int)$delay;
 
@@ -44,7 +45,7 @@ class Translate extends Command
          * ['key' => 'translation']
          */
         $sourceTranslations = json_decode(
-                                  (string)file_get_contents("{$src}/{$lang}.json"),
+                                  (string)file_get_contents($src . "/" . $lang . '.json'),
                                   true
                               )['messages'] ?? [];
 
