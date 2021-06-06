@@ -1,4 +1,11 @@
 # Changelog
+### [0.1.5](https://github.com/spartan/i18n/compare/v0.1.4...v0.1.5) (2021-06-06)
+
+
+### Fixes
+
+* command extract translations for vue files ([47c0907](https://github.com/spartan/i18n/commit/47c09075ec57b524fd14ab80d276684071d28fb5))
+
 ### [0.1.4](https://github.com/spartan/i18n/compare/v0.1.3...v0.1.4) (2021-03-10)
 
 
