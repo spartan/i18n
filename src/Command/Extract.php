@@ -152,8 +152,8 @@ class Extract extends Command
                 $contents = file_get_contents($item->getPathname());
 
                 $patterns = [
-                    '#($|i18n\.)t\(\"([^\"]+)#',
-                    '#($|i18n\.)t\(\'([^\']+)#',
+                    '#(\$|i18n\.)t\(\"([^\"]+)#',
+                    '#(\$|i18n\.)t\(\'([^\']+)#',
                     '#(\$|i18n\.)tc\(\"([^\"]+)#',
                     '#(\$|i18n\.)tc\(\'([^\']+)#',
                     '#"([^"]+)"[ ,;]{1,3}//tt#',
