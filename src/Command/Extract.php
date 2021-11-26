@@ -152,27 +152,36 @@ class Extract extends Command
                 $contents = file_get_contents($item->getPathname());
 
                 $patterns = [
-                    '#(\$|i18n\.)t\(\"([^\"]+)#',
-                    '#(\$|i18n\.)t\(\'([^\']+)#',
-                    '#(\$|i18n\.)tc\(\"([^\"]+)#',
-                    '#(\$|i18n\.)tc\(\'([^\']+)#',
-                    '#"([^"]+)"[ ,;]{1,3}//tt#',
-                    "#'([^']+)'[ ,;]{1,3}//tt#",
+                    '#(?:\$|i18n\.)t\(\"([^\"]+)([^/]+//tt.*)?#',
+                    '#(?:\$|i18n\.)t\(\'([^\']+)([^/]+//tt.*)?#',
+                    '#(?:\$|i18n\.)tc\(\"([^\"]+)([^/]+//tt.*)?#',
+                    '#(?:\$|i18n\.)tc\(\'([^\']+)([^/]+//tt.*)?#',
+                    '#"([^"]+)"[ ,;]{1,3}//tt(.*)?#',
+                    "#'([^']+)'[ ,;]{1,3}//tt(.*)?#",
                 ];
 
                 foreach ($patterns as $pattern) {
                     preg_match_all($pattern, (string)$contents, $matches);
 
-                    $translations = $matches[2] ?? $matches[1];
+                    $translations = array_combine(
+                        $matches[1],
+                        fluent($matches[2])->map(
+                            function ($value) {
+                                [$_, $value] = explode('//tt', $value) + ['', ''];
+
+                                return trim($value, ' "\'');
+                            }
+                        )->toArray()
+                    );
 
                     if (count($translations)) {
-                        $keys += array_flip($translations);
+                        $keys += $translations;
                     }
                 }
             }
         }
 
-        return array_fill_keys(array_keys($keys), '');
+        return $keys;
     }
 
     /**
