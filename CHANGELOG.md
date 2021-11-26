@@ -1,4 +1,11 @@
 # Changelog
+### [0.1.6](https://github.com/spartan/i18n/compare/v0.1.5...v0.1.6) (2021-11-26)
+
+
+### New
+
+* auto translate for js files with //tt marker ([91c7333](https://github.com/spartan/i18n/commit/91c7333ad1f9ba4dffe5ecd12a04abdaba8b2837))
+
 ### [0.1.5](https://github.com/spartan/i18n/compare/v0.1.4...v0.1.5) (2021-06-06)
 
 
