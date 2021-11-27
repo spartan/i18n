@@ -1,4 +1,11 @@
 # Changelog
+### [0.1.7](https://github.com/spartan/i18n/compare/v0.1.6...v0.1.7) (2021-11-27)
+
+
+### Fixes
+
+* edge case on extract translation with text from js files ([8b87a07](https://github.com/spartan/i18n/commit/8b87a076401cd3eed85427b23caa60759cddbd07))
+
 ### [0.1.6](https://github.com/spartan/i18n/compare/v0.1.5...v0.1.6) (2021-11-26)
 
 
