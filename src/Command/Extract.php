@@ -167,9 +167,11 @@ class Extract extends Command
                         $matches[1],
                         fluent($matches[2])->map(
                             function ($value) {
-                                [$_, $value] = explode('//tt', $value) + ['', ''];
+                                $translation = strpos($value, '//tt') !== false
+                                    ? (explode('//tt', $value) + ['', ''])[1]
+                                    : $value;
 
-                                return trim($value, ' "\'');
+                                return trim($translation, ' "\'');
                             }
                         )->toArray()
                     );
