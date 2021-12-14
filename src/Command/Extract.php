@@ -25,6 +25,7 @@ class Extract extends Command
              ->withOption('dry', 'Dry run without saving')
              ->withOption('dst', 'Path of locale files')
              ->withOption('smart-copy', 'Text with spaces are considered paragraphs and copied verbatim')
+             ->withOption('smart-label', 'Text starting with # are transformed into titleCase')
              ->withOption('append', 'Append without removing');
     }
 
@@ -40,10 +41,11 @@ class Extract extends Command
         self::loadEnv();
 
         /** @var string $src */
-        $src         = $input->getOption('src');
-        $dst         = $input->getOption('dst') ?: (getenv('I18N_DOMAIN') ?: './resources / locales');
-        $append      = $this->isOptionPresent('append');
-        $isSmartCopy = $this->isOptionPresent('smart-copy');
+        $src          = $input->getOption('src');
+        $dst          = $input->getOption('dst') ?: (getenv('I18N_DOMAIN') ?: './resources / locales');
+        $append       = $this->isOptionPresent('append');
+        $isSmartCopy  = $this->isOptionPresent('smart-copy');
+        $isSmartLabel = $this->isOptionPresent('smart-label');
 
         $keys = [];
         foreach (explode(',', $src) as $oneSrc) {
@@ -116,6 +118,16 @@ class Extract extends Command
                     foreach ($json['messages'] as $key => &$value) {
                         if (strpos($key, ' ') > 0 && $value === '') {
                             $value = $key;
+                        } elseif (preg_match('/^[A-Z]{1}/', $key)) {
+                            $value = $key;
+                        }
+                    }
+                }
+
+                if ($isSmartLabel) {
+                    foreach ($json['messages'] as $key => &$value) {
+                        if ($key[0] == '#' && $value === '') {
+                            $value = mb_convert_case(str_replace('_', ' ', substr($key, 1)), MB_CASE_TITLE, 'utf8');
                         }
                     }
                 }
@@ -152,10 +164,10 @@ class Extract extends Command
                 $contents = file_get_contents($item->getPathname());
 
                 $patterns = [
-                    '#(?:\$|i18n\.)t\(\"([^\"]+)([^/]+//tt.*)?#',
-                    '#(?:\$|i18n\.)t\(\'([^\']+)([^/]+//tt.*)?#',
-                    '#(?:\$|i18n\.)tc\(\"([^\"]+)([^/]+//tt.*)?#',
-                    '#(?:\$|i18n\.)tc\(\'([^\']+)([^/]+//tt.*)?#',
+                    '#(?:\$|i18n\.)t\(\"([^\"]+)(.*)#',
+                    '#(?:\$|i18n\.)t\(\'([^\']+)(.*)#',
+                    '#(?:\$|i18n\.)tc\(\"([^\"]+)(.*)#',
+                    '#(?:\$|i18n\.)tc\(\'([^\']+)(.*)#',
                     '#"([^"]+)"[ ,;]{1,3}//tt(.*)?#',
                     "#'([^']+)'[ ,;]{1,3}//tt(.*)?#",
                 ];
@@ -169,7 +181,7 @@ class Extract extends Command
                             function ($value) {
                                 $translation = strpos($value, '//tt') !== false
                                     ? (explode('//tt', $value) + ['', ''])[1]
-                                    : $value;
+                                    : '';
 
                                 return trim($translation, ' "\'');
                             }
