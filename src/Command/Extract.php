@@ -181,7 +181,7 @@ class Extract extends Command
                             function ($value) {
                                 $translation = strpos($value, '//tt') !== false
                                     ? (explode('//tt', $value) + ['', ''])[1]
-                                    : '';
+                                    : (string)$value;
 
                                 return trim($translation, ' "\'');
                             }
