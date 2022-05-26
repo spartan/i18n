@@ -1,4 +1,11 @@
 # Changelog
+### [0.1.9](https://github.com/spartan/i18n/compare/v0.1.8...v0.1.9) (2022-05-26)
+
+
+### New
+
+* reset translations via t function ([2a2a896](https://github.com/spartan/i18n/commit/2a2a89639526e699bb1854d83117e83b26b636a7))
+
 ### [0.1.8](https://github.com/spartan/i18n/compare/v0.1.7...v0.1.8) (2021-12-14)
 
 
