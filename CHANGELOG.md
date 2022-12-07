@@ -1,4 +1,11 @@
 # Changelog
+### [0.1.10](https://github.com/spartan/i18n/compare/v0.1.9...v0.1.10) (2022-12-07)
+
+
+### New
+
+* extract only for a specific locale ([5a25180](https://github.com/spartan/i18n/commit/5a25180aac709aeab93f7b8ed6716afb8c5dc954))
+
 ### [0.1.9](https://github.com/spartan/i18n/compare/v0.1.8...v0.1.9) (2022-05-26)
 
 
