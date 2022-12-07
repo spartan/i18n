@@ -26,6 +26,7 @@ class Extract extends Command
              ->withOption('dst', 'Path of locale files')
              ->withOption('smart-copy', 'Text with spaces are considered paragraphs and copied verbatim')
              ->withOption('smart-label', 'Text starting with # are transformed into titleCase')
+             ->withOption('locale', 'Only update this locale')
              ->withOption('append', 'Append without removing');
     }
 
@@ -46,6 +47,7 @@ class Extract extends Command
         $append       = $this->isOptionPresent('append');
         $isSmartCopy  = $this->isOptionPresent('smart-copy');
         $isSmartLabel = $this->isOptionPresent('smart-label');
+        $onlyLocale   = $input->getOption('locale');
 
         $keys = [];
         foreach (explode(',', $src) as $oneSrc) {
@@ -58,10 +60,15 @@ class Extract extends Command
         $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dst));
         foreach ($iterator as $item) {
             if (!$item->isDir() && substr($item->getPathName(), -4) == 'json') {
-                $file             = $item->getPathName();
-                $locale           = substr($file, strrpos($file, '/') + 1, strlen($file) - strrpos($file, '.'));
-                $json             = json_decode((string)file_get_contents($file), true);
-                $messages         = $this->flatten($json['messages']);
+                $file     = $item->getPathName();
+                $locale   = substr($file, strrpos($file, '/') + 1, strlen($file) - strrpos($file, '.'));
+                $json     = json_decode((string)file_get_contents($file), true);
+                $messages = $this->flatten($json['messages']);
+
+                if ($onlyLocale && $locale != $onlyLocale) {
+                    continue;
+                }
+
                 $locales[$locale] = [
                     'common'     => $append ? $messages : array_intersect_key($messages, $keys),
                     'deprecated' => $append ? [] : array_diff_key($messages, $keys),
